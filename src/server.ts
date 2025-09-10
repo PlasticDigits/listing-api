@@ -131,7 +131,7 @@ app.get("/api/v3/supply/circulating/:symbol", async (req, res) => {
   }
 });
 
-export function startServer(port: number = 3000) {
+export function startServer(port: number = Number(process.env.PORT) || 3000) {
   app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`Server listening on http://localhost:${port}`);
@@ -139,6 +139,5 @@ export function startServer(port: number = 3000) {
 }
 
 if (require.main === module) {
-  // Fixed port; no env variables by requirement
-  startServer(3000);
+  startServer();
 }
