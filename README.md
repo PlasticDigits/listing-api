@@ -29,7 +29,9 @@ PORT=3000 npm start
 
 ### Rate limiting and caching
 
-- Rate limit: 60 requests per 30 minutes per IP.
+- Rate limit (configurable): defaults to 60 requests per 30 minutes per IP.
+  - `RATE_LIMIT_WINDOW_MS`: window size in ms (default: `1800000`)
+  - `RATE_LIMIT_MAX`: max requests per IP per window (default: `60`)
 - In‑memory cache TTL: 60 seconds per token per chain.
 
 ### Routes

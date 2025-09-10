@@ -10,12 +10,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rate limit: allow significant headroom over 1 req/30min
-// e.g., 60 requests per 30 minutes per IP
+// Rate limiting (configurable via env): default 60 reqs per 30 minutes per IP
+const RATE_LIMIT_WINDOW_MS = Number(
+  process.env.RATE_LIMIT_WINDOW_MS || 30 * 60 * 1000
+);
+const RATE_LIMIT_MAX = Number(process.env.RATE_LIMIT_MAX || 60);
+
 app.use(
   rateLimit({
-    windowMs: 30 * 60 * 1000,
-    max: 60,
+    windowMs: RATE_LIMIT_WINDOW_MS,
+    max: RATE_LIMIT_MAX,
     standardHeaders: true,
     legacyHeaders: false,
   })
