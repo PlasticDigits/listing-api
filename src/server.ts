@@ -10,11 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rate limiting (configurable via env): default 60 reqs per 30 minutes per IP
+// Rate limiting (configurable via env): default 360 reqs per 30 minutes per IP
 const RATE_LIMIT_WINDOW_MS = Number(
   process.env.RATE_LIMIT_WINDOW_MS || 30 * 60 * 1000
 );
-const RATE_LIMIT_MAX = Number(process.env.RATE_LIMIT_MAX || 60);
+const RATE_LIMIT_MAX = Number(process.env.RATE_LIMIT_MAX || 360);
 
 app.use(
   rateLimit({
