@@ -135,6 +135,42 @@ app.get("/api/v3/supply/circulating/:symbol", async (req, res) => {
   }
 });
 
+// CMC plain-text total supply endpoint (returns only the decimal string)
+app.get("/cmc/total/:symbol", async (req, res) => {
+  try {
+    const { symbol } = req.params;
+    const token = TOKENS.find(
+      (t) => t.symbol.toLowerCase() === symbol.toLowerCase()
+    );
+    if (!token) {
+      return res.type("text/plain").send("NA");
+    }
+    const s = await getErc20Supply(token);
+    const resultStr = formatUnits(BigInt(s.totalSupplyAdjustedRaw), s.decimals);
+    res.type("text/plain").send(resultStr);
+  } catch (_error: any) {
+    res.type("text/plain").send("NA");
+  }
+});
+
+// CMC plain-text circulating supply endpoint (returns only the decimal string)
+app.get("/cmc/circulating/:symbol", async (req, res) => {
+  try {
+    const { symbol } = req.params;
+    const token = TOKENS.find(
+      (t) => t.symbol.toLowerCase() === symbol.toLowerCase()
+    );
+    if (!token) {
+      return res.type("text/plain").send("NA");
+    }
+    const s = await getErc20Supply(token);
+    const resultStr = formatUnits(BigInt(s.circulatingSupplyRaw), s.decimals);
+    res.type("text/plain").send(resultStr);
+  } catch (_error: any) {
+    res.type("text/plain").send("NA");
+  }
+});
+
 export function startServer(port: number = Number(process.env.PORT) || 3000) {
   app.listen(port, () => {
     // eslint-disable-next-line no-console
