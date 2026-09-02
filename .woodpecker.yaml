@@ -31,7 +31,7 @@ steps:
           https://github.com/opengrep/opengrep/releases/download/v1.29.0/opengrep_musllinux_x86
         echo "1b474bf207905a3cffe4e915fe36895835bc89de2620cb2ffd88ca512d9ea31b  /tmp/opengrep" | sha256sum -c
         chmod +x /tmp/opengrep
-        /tmp/opengrep scan --error --metrics=off --config .opengrep.yml .
+        /tmp/opengrep scan --error --config .opengrep.yml .
 
   - name: trivy-fs
     image: woodpeckerci/plugin-trivy:1.2.0@sha256:8019658e562d06876fd8b3ac9640c20e0fd964e5fbac3a41856443f0d9d672ba
