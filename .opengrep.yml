@@ -1,0 +1,9 @@
+# Minimal local ruleset so CI does not float `--config auto`.
+# Add product rules beside this file; fail the pipeline on ERROR matches.
+
+rules:
+  - id: cl8y.placeholder-eval
+    message: Placeholder OpenGrep rule; does not match ordinary application code.
+    languages: [python]
+    severity: ERROR
+    pattern: cl8y_opengrep_should_never_match_eval($$$ARGS)
