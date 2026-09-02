@@ -33,6 +33,12 @@ steps:
         chmod +x /tmp/opengrep
         /tmp/opengrep scan --error --config .opengrep.yml .
 
+  - name: build
+    image: node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
+    commands:
+      - npm ci
+      - npm run build
+
   - name: trivy-fs
     image: woodpeckerci/plugin-trivy:1.2.0@sha256:8019658e562d06876fd8b3ac9640c20e0fd964e5fbac3a41856443f0d9d672ba
     settings:
@@ -40,12 +46,6 @@ steps:
       severity: HIGH,CRITICAL
       exit-code: 1
       skip-dirs: vendor,node_modules
-
-  - name: build
-    image: node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293
-    commands:
-      - npm ci
-      - npm run build
 
   - name: telegram-failure
     image: appleboy/drone-telegram:1.3.0@sha256:a5198f0a17cfdef85a2b8f19d379bcbfd482db911a5c02fbc311a0067d82b3f0
