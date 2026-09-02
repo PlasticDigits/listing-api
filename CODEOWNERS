@@ -1,0 +1,5 @@
+# Request review from trusted maintainers on every change.
+# Forgejo CODEOWNERS uses Go regular expressions, not GitHub glob syntax.
+# Place this file at the repository root, or in docs/ or .forgejo/.
+
+.* @code/maintainers
