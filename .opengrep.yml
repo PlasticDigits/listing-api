@@ -6,4 +6,4 @@ rules:
     message: Placeholder OpenGrep rule; does not match ordinary application code.
     languages: [python]
     severity: ERROR
-    pattern: cl8y_opengrep_should_never_match_eval($$$ARGS)
+    pattern: cl8y_opengrep_should_never_match_eval()
