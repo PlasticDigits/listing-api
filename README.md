@@ -129,3 +129,6 @@ curl -s http://localhost:3000/api/v1/supply/CZB | jq
 
 - Production entrypoint is `dist/server.js` (script: `npm start`).
 - A Render configuration is provided in `render.yaml` if deploying to Render.
+
+
+**Runtime security (2026-10-22).** The Dockerfile pins Node.js 24.22.1 Bookworm by digest, builds TypeScript, and ships only production dependencies and compiled output under the non-root Node user. Deploy the existing Coolify application using Dockerfile build pack with base `/` and Dockerfile `/Dockerfile`; runtime environment and port remain managed by Coolify. Its Docker healthcheck requires patched Node24 and `/health`. CI uses the same pinned Node release. The Forgejo repository `code/listing-api` is authoritative and mirrors to GitHub; merge there before deploying a revision available on the GitHub source.
